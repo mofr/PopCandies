@@ -20,9 +20,9 @@ public class RenderSystem extends BaseEntitySystem {
     protected ComponentMapper<TextureComponent> mTextureComponent;
     protected ComponentMapper<PositionComponent> mPositionComponent;
 
-    public RenderSystem(SpriteBatch batch, ShapeRenderer shapeRenderer) {
-        this.batch = batch;
-        this.shapeRenderer = shapeRenderer;
+    public RenderSystem() {
+        this.batch = new SpriteBatch();
+        this.shapeRenderer = new ShapeRenderer();
     }
 
     @Override
@@ -49,5 +49,10 @@ public class RenderSystem extends BaseEntitySystem {
             batch.draw(texture, positionX, positionY);
         }
         batch.end();
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
     }
 }
