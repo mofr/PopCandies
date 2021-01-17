@@ -3,19 +3,19 @@ package ru.mofr.popballs.utils;
 import com.badlogic.gdx.Gdx;
 
 public class Camera {
-    public static int projectX(int x) {
+    public static double projectX(double x) {
         return x + Gdx.graphics.getWidth() / 2;
     }
 
-    public static int projectY(int y) {
+    public static double projectY(double y) {
         return y + Gdx.graphics.getHeight() / 2;
     }
 
-    public static int unprojectX(int x) {
+    public static double unprojectX(double x) {
         return x - Gdx.graphics.getWidth() / 2;
     }
 
-    public static int unprojectY(int y) {
+    public static double unprojectY(double y) {
         return Gdx.graphics.getHeight() - y - Gdx.graphics.getHeight() / 2;
     }
 }

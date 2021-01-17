@@ -4,10 +4,7 @@ import com.artemis.ComponentMapper;
 import com.artemis.annotations.All;
 import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Texture;
-import ru.mofr.popballs.components.ClickComponent;
-import ru.mofr.popballs.components.NewGameComponent;
-import ru.mofr.popballs.components.PositionComponent;
-import ru.mofr.popballs.components.TextureComponent;
+import ru.mofr.popballs.components.*;
 
 @All(ClickComponent.class)
 public class CreateCandyOnClickSystem extends IteratingSystem {
@@ -26,5 +23,7 @@ public class CreateCandyOnClickSystem extends IteratingSystem {
         positionComponent.x = x;
         positionComponent.y = y;
         world.edit(ball).create(TextureComponent.class).texture = candyTexture;
+        PhysicsBodyComponent physicsBodyComponent = world.edit(ball).create(PhysicsBodyComponent.class);
+        physicsBodyComponent.radius = 40;
     }
 }

@@ -42,11 +42,11 @@ public class RenderSystem extends BaseEntitySystem {
         for (int i = 0, s = actives.size(); s > i; i++) {
             int id = ids[i];
             Texture texture = mTextureComponent.get(id).texture;
-            int positionX = Camera.projectX(mPositionComponent.get(id).x);
-            int positionY = Camera.projectY(mPositionComponent.get(id).y);
-            positionX -= texture.getWidth() / 2;
-            positionY -= texture.getHeight() / 2;
-            batch.draw(texture, positionX, positionY);
+            double positionX = Camera.projectX(mPositionComponent.get(id).x);
+            double positionY = Camera.projectY(mPositionComponent.get(id).y);
+            positionX -= texture.getWidth() / 2.0;
+            positionY -= texture.getHeight() / 2.0;
+            batch.draw(texture, (float)positionX, (float)positionY);
         }
         batch.end();
     }
