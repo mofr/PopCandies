@@ -16,13 +16,11 @@ import ru.mofr.popballs.utils.Camera;
 @All({TextureComponent.class, PositionComponent.class})
 public class RenderSystem extends BaseEntitySystem {
     private final SpriteBatch batch;
-    private final ShapeRenderer shapeRenderer;
     protected ComponentMapper<TextureComponent> mTextureComponent;
     protected ComponentMapper<PositionComponent> mPositionComponent;
 
     public RenderSystem() {
         this.batch = new SpriteBatch();
-        this.shapeRenderer = new ShapeRenderer();
     }
 
     @Override
@@ -31,10 +29,6 @@ public class RenderSystem extends BaseEntitySystem {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         Gdx.gl.glLineWidth(2);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.setColor(0,0,0,0);
-        shapeRenderer.line(0, 0, 100, 100);
-        shapeRenderer.end();
 
         batch.begin();
         IntBag actives = subscription.getEntities();

@@ -24,6 +24,7 @@ public class CreateCandyOnClickSystem extends IteratingSystem {
         positionComponent.y = y;
         world.edit(ball).create(TextureComponent.class).texture = candyTexture;
         PhysicsBodyComponent physicsBodyComponent = world.edit(ball).create(PhysicsBodyComponent.class);
+        physicsBodyComponent.hasMass = true;
         physicsBodyComponent.fixtures = new PhysicsBodyComponent.Fixture[1];
         physicsBodyComponent.fixtures[0] = new PhysicsBodyComponent.Fixture();
         physicsBodyComponent.fixtures[0].circle = new PhysicsBodyComponent.Circle();

@@ -3,7 +3,7 @@ package ru.mofr.popballs.systems;
 import com.artemis.annotations.All;
 import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Texture;
-import org.dyn4j.geometry.Vector2;
+import com.badlogic.gdx.math.Vector2;
 import ru.mofr.popballs.components.*;
 
 @All(NewGameComponent.class)
@@ -43,26 +43,26 @@ public class NewGameSystem extends IteratingSystem {
         physicsBodyComponent.fixtures[0] = new PhysicsBodyComponent.Fixture();
         physicsBodyComponent.fixtures[0].polygon = new PhysicsBodyComponent.Polygon();
         physicsBodyComponent.fixtures[0].polygon.vertices = new Vector2[] {
-                new Vector2(-45.807, 38.832),
-                new Vector2(-49.801, 37.849),
-                new Vector2(-31.951, -45.041),
-                new Vector2(-27.978, -39.773),
+                new Vector2(-458.07f, 388.32f),
+                new Vector2(-498.01f, 378.49f),
+                new Vector2(-319.51f, -450.41f),
+                new Vector2(-279.78f, -397.73f),
         };
         physicsBodyComponent.fixtures[1] = new PhysicsBodyComponent.Fixture();
         physicsBodyComponent.fixtures[1].polygon = new PhysicsBodyComponent.Polygon();
         physicsBodyComponent.fixtures[1].polygon.vertices = new Vector2[] {
-                new Vector2(23.748, -40.087),
-                new Vector2(-27.978, -39.773),
-                new Vector2(-31.951, -45.041),
-                new Vector2(28.346, -44.798),
+                new Vector2(237.48f, -400.87f),
+                new Vector2(-279.78f, -397.73f),
+                new Vector2(-319.51f, -450.41f),
+                new Vector2(283.46f, -447.98f),
         };
         physicsBodyComponent.fixtures[2] = new PhysicsBodyComponent.Fixture();
         physicsBodyComponent.fixtures[2].polygon = new PhysicsBodyComponent.Polygon();
         physicsBodyComponent.fixtures[2].polygon.vertices = new Vector2[] {
-                new Vector2(47.012, 38.245),
-                new Vector2(43.016, 39.218),
-                new Vector2(23.748, -40.087),
-                new Vector2(28.346, -44.798),
+                new Vector2(470.12f, 382.45f),
+                new Vector2(430.16f, 392.18f),
+                new Vector2(237.48f, -400.87f),
+                new Vector2(283.46f, -447.98f),
         };
     }
 }

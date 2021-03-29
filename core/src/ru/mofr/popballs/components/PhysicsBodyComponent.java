@@ -1,7 +1,7 @@
 package ru.mofr.popballs.components;
 
 import com.artemis.Component;
-import org.dyn4j.geometry.Vector2;
+import com.badlogic.gdx.math.Vector2;
 
 public class PhysicsBodyComponent extends Component {
     public static class Fixture {

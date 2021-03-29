@@ -19,6 +19,7 @@ public class Game extends ApplicationAdapter {
                 .with(new CreateCandyOnClickSystem())
                 .with(new PhysicsSystem())
                 .with(new RenderSystem())
+                .with(new PhysicsDebugRenderSystem())
                 .with(new CleanUpSystem())
                 .build();
 

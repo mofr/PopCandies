@@ -45,7 +45,11 @@ public class PhysicsSystem extends BaseEntitySystem {
                 convex = new Circle(fixture.circle.radius);
             }
             else if (fixture.polygon != null) {
-                convex = new Polygon(fixture.polygon.vertices);
+                Vector2[] vertices = new Vector2[fixture.polygon.vertices.length];
+                for (int i = 0; i < fixture.polygon.vertices.length; i++) {
+                    vertices[i] = new Vector2(fixture.polygon.vertices[i].x, fixture.polygon.vertices[i].y);
+                }
+                convex = new Polygon(vertices);
             }
 
             if (convex != null) {
@@ -67,7 +71,7 @@ public class PhysicsSystem extends BaseEntitySystem {
 
     @Override
     protected void processSystem() {
-        physicsWorld.update(this.world.getDelta());
+        physicsWorld.update(this.world.getDelta() * 10, 10);
 
         for (int i = 0; i < physicsWorld.getBodyCount(); ++i) {
             Body body = physicsWorld.getBody(i);
