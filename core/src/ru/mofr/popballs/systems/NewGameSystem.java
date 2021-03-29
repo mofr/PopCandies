@@ -10,6 +10,10 @@ import ru.mofr.popballs.components.*;
 public class NewGameSystem extends IteratingSystem {
     private final Texture candyTexture = new Texture("candy10.png");
 
+    public NewGameSystem() {
+        candyTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+    }
+
     @Override
     protected void process(int entityId) {
         createBall(0, 0);

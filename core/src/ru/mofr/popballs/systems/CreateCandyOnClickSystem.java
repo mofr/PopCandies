@@ -11,6 +11,10 @@ public class CreateCandyOnClickSystem extends IteratingSystem {
     private final Texture candyTexture = new Texture("candy9.png");
     protected ComponentMapper<ClickComponent> mClickComponent;
 
+    public CreateCandyOnClickSystem() {
+        candyTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+    }
+
     @Override
     protected void process(int entityId) {
         ClickComponent click = mClickComponent.get(entityId);
