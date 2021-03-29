@@ -79,6 +79,7 @@ public class PhysicsSystem extends BaseEntitySystem {
             PositionComponent positionComponent = mPositionComponent.get(entity);
             positionComponent.x = body.getTransform().getTranslationX();
             positionComponent.y = body.getTransform().getTranslationY();
+            positionComponent.angle = body.getTransform().getRotationAngle() * 57.2958;
         }
     }
 }
