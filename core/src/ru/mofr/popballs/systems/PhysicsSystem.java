@@ -4,10 +4,7 @@ import com.artemis.BaseEntitySystem;
 import com.artemis.ComponentMapper;
 import com.artemis.annotations.All;
 import org.dyn4j.dynamics.Body;
-import org.dyn4j.geometry.Circle;
-import org.dyn4j.geometry.Mass;
-import org.dyn4j.geometry.MassType;
-import org.dyn4j.geometry.Vector2;
+import org.dyn4j.geometry.*;
 import org.dyn4j.world.World;
 import ru.mofr.popballs.components.PhysicsBodyComponent;
 import ru.mofr.popballs.components.PositionComponent;
@@ -33,12 +30,29 @@ public class PhysicsSystem extends BaseEntitySystem {
     protected void inserted(int entityId) {
         PhysicsBodyComponent physicsBodyComponent = mPhysicsBodyComponent.get(entityId);
         PositionComponent positionComponent = mPositionComponent.get(entityId);
-        Circle circle = new Circle(physicsBodyComponent.radius);
+
         Body body = new Body();
-        body.setMass(new Mass(new Vector2(0.0, 0.0), 60.0, 2.0));
-        body.setMassType(MassType.NORMAL);
-        body.addFixture(circle);
         body.translate(positionComponent.x, positionComponent.y);
+
+        if (physicsBodyComponent.hasMass) {
+            body.setMass(new Mass(new Vector2(0.0, 0.0), 60.0, 2.0));
+            body.setMassType(MassType.NORMAL);
+        }
+
+        for (PhysicsBodyComponent.Fixture fixture : physicsBodyComponent.fixtures) {
+            Convex convex = null;
+            if (fixture.circle != null) {
+                convex = new Circle(fixture.circle.radius);
+            }
+            else if (fixture.polygon != null) {
+                convex = new Polygon(fixture.polygon.vertices);
+            }
+
+            if (convex != null) {
+                body.addFixture(convex);
+            }
+        }
+
         this.physicsWorld.addBody(body);
         bodyToEntityMap.put(body, entityId);
     }
