@@ -14,6 +14,7 @@ import java.util.Map;
 
 @All({PhysicsBodyComponent.class, PositionComponent.class})
 public class PhysicsSystem extends BaseEntitySystem {
+    final private static float SCALE = 200;
     final private World<Body> physicsWorld;
     final private Map<Body, Integer> bodyToEntityMap = new HashMap<>();
     final private Map<Integer, Body> entityToBodyMap = new HashMap<>();
@@ -32,7 +33,7 @@ public class PhysicsSystem extends BaseEntitySystem {
         PositionComponent positionComponent = mPositionComponent.get(entityId);
 
         Body body = new Body();
-        body.translate(positionComponent.x, positionComponent.y);
+        body.translate(positionComponent.x / SCALE, positionComponent.y / SCALE);
 
         if (physicsBodyComponent.hasMass) {
             body.setMass(new Mass(new Vector2(0.0, 0.0), 60.0, 2.0));
@@ -42,12 +43,12 @@ public class PhysicsSystem extends BaseEntitySystem {
         for (PhysicsBodyComponent.Fixture fixture : physicsBodyComponent.fixtures) {
             Convex convex = null;
             if (fixture.circle != null) {
-                convex = new Circle(fixture.circle.radius);
+                convex = new Circle(fixture.circle.radius / SCALE);
             }
             else if (fixture.polygon != null) {
                 Vector2[] vertices = new Vector2[fixture.polygon.vertices.length];
                 for (int i = 0; i < fixture.polygon.vertices.length; i++) {
-                    vertices[i] = new Vector2(fixture.polygon.vertices[i].x, fixture.polygon.vertices[i].y);
+                    vertices[i] = new Vector2(fixture.polygon.vertices[i].x / SCALE, fixture.polygon.vertices[i].y / SCALE);
                 }
                 convex = new Polygon(vertices);
             }
@@ -71,14 +72,14 @@ public class PhysicsSystem extends BaseEntitySystem {
 
     @Override
     protected void processSystem() {
-        physicsWorld.update(this.world.getDelta() * 10, 10);
+        physicsWorld.update(this.world.getDelta());
 
         for (int i = 0; i < physicsWorld.getBodyCount(); ++i) {
             Body body = physicsWorld.getBody(i);
             int entity = bodyToEntityMap.get(body);
             PositionComponent positionComponent = mPositionComponent.get(entity);
-            positionComponent.x = body.getTransform().getTranslationX();
-            positionComponent.y = body.getTransform().getTranslationY();
+            positionComponent.x = body.getTransform().getTranslationX() * SCALE;
+            positionComponent.y = body.getTransform().getTranslationY() * SCALE;
             positionComponent.angle = body.getTransform().getRotationAngle() * 57.2958;
         }
     }

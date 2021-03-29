@@ -14,7 +14,8 @@ public class CreateCandyOnClickSystem extends IteratingSystem {
     @Override
     protected void process(int entityId) {
         ClickComponent click = mClickComponent.get(entityId);
-        createBall(click.x, click.y);
+        for (int i = 0; i < 3; ++i)
+            createBall(click.x, click.y);
     }
 
     private void createBall(int x, int y) {

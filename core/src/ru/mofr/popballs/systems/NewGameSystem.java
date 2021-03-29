@@ -36,7 +36,7 @@ public class NewGameSystem extends IteratingSystem {
         int walls = world.create();
         PositionComponent positionComponent = world.edit(walls).create(PositionComponent.class);
         positionComponent.x = 0;
-        positionComponent.y = 0;
+        positionComponent.y = -100;
         PhysicsBodyComponent physicsBodyComponent = world.edit(walls).create(PhysicsBodyComponent.class);
         physicsBodyComponent.hasMass = false;
         physicsBodyComponent.fixtures = new PhysicsBodyComponent.Fixture[3];
