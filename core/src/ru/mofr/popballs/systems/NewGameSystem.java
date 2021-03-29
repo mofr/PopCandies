@@ -8,7 +8,7 @@ import ru.mofr.popballs.components.*;
 
 @All(NewGameComponent.class)
 public class NewGameSystem extends IteratingSystem {
-    private final Texture candyTexture = new Texture("candy1.png");
+    private final Texture candyTexture = new Texture("candy10.png");
 
     @Override
     protected void process(int entityId) {
@@ -29,7 +29,7 @@ public class NewGameSystem extends IteratingSystem {
         physicsBodyComponent.fixtures = new PhysicsBodyComponent.Fixture[1];
         physicsBodyComponent.fixtures[0] = new PhysicsBodyComponent.Fixture();
         physicsBodyComponent.fixtures[0].circle = new PhysicsBodyComponent.Circle();
-        physicsBodyComponent.fixtures[0].circle.radius = 40;
+        physicsBodyComponent.fixtures[0].circle.radius = 60;
     }
 
     private void createWalls() {

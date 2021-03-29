@@ -8,7 +8,7 @@ import ru.mofr.popballs.components.*;
 
 @All(ClickComponent.class)
 public class CreateCandyOnClickSystem extends IteratingSystem {
-    private final Texture candyTexture = new Texture("candy1.png");
+    private final Texture candyTexture = new Texture("candy9.png");
     protected ComponentMapper<ClickComponent> mClickComponent;
 
     @Override
@@ -28,6 +28,6 @@ public class CreateCandyOnClickSystem extends IteratingSystem {
         physicsBodyComponent.fixtures = new PhysicsBodyComponent.Fixture[1];
         physicsBodyComponent.fixtures[0] = new PhysicsBodyComponent.Fixture();
         physicsBodyComponent.fixtures[0].circle = new PhysicsBodyComponent.Circle();
-        physicsBodyComponent.fixtures[0].circle.radius = 40;
+        physicsBodyComponent.fixtures[0].circle.radius = 60;
     }
 }
