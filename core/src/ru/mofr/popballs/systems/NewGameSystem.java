@@ -6,9 +6,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import ru.mofr.popballs.components.*;
 
+import java.util.Random;
+
 @All(NewGameComponent.class)
 public class NewGameSystem extends IteratingSystem {
     private final Texture candyTexture = new Texture("candy10.png");
+    private final Random random = new Random();
 
     public NewGameSystem() {
         candyTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
@@ -16,13 +19,15 @@ public class NewGameSystem extends IteratingSystem {
 
     @Override
     protected void process(int entityId) {
-        createBall(0, 0);
-        createBall(100, 100);
-        createBall(-200, -250);
+        for (int i = 0; i < 70; ++i) {
+            float x = random.nextInt(200) - 100;
+            float y = 1000 + random.nextInt(400);
+            createBall(x, y);
+        }
         createWalls();
     }
 
-    private void createBall(int x, int y) {
+    private void createBall(float x, float y) {
         int ball = world.create();
         PositionComponent positionComponent = world.edit(ball).create(PositionComponent.class);
         positionComponent.x = x;
