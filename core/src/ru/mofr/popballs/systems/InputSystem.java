@@ -12,8 +12,8 @@ public class InputSystem extends BaseSystem {
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             int click = this.world.create();
             ClickComponent clickComponent = this.world.edit(click).create(ClickComponent.class);
-            clickComponent.x = (int) Camera.unprojectX(Gdx.input.getX());
-            clickComponent.y = (int) Camera.unprojectY(Gdx.input.getY());
+            clickComponent.x = Camera.unprojectX(Gdx.input.getX());
+            clickComponent.y = Camera.unprojectY(Gdx.input.getY());
         }
     }
 }

@@ -39,6 +39,7 @@ public class NewGameSystem extends IteratingSystem {
         physicsBodyComponent.fixtures[0] = new PhysicsBodyComponent.Fixture();
         physicsBodyComponent.fixtures[0].circle = new PhysicsBodyComponent.Circle();
         physicsBodyComponent.fixtures[0].circle.radius = 60;
+        world.edit(ball).create(PoppableComponent.class);
     }
 
     private void createWalls() {

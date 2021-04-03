@@ -22,7 +22,7 @@ public class CreateCandyOnClickSystem extends IteratingSystem {
             createBall(click.x, click.y);
     }
 
-    private void createBall(int x, int y) {
+    private void createBall(double x, double y) {
         int ball = world.create();
         PositionComponent positionComponent = world.edit(ball).create(PositionComponent.class);
         positionComponent.x = x;
