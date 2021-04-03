@@ -3,7 +3,7 @@ package ru.mofr.popballs.systems;
 import com.artemis.annotations.All;
 import com.artemis.systems.IteratingSystem;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import ru.mofr.popballs.components.*;
 
@@ -33,9 +33,10 @@ public class NewGameSystem extends IteratingSystem {
         PositionComponent positionComponent = world.edit(ball).create(PositionComponent.class);
         positionComponent.x = x;
         positionComponent.y = y;
-        Sprite sprite = new Sprite(candyTexture);
-        sprite.setCenter(0.5f, 0.5f);
-        world.edit(ball).create(SpriteComponent.class).sprite = sprite;
+        SpriteComponent spriteComponent = world.edit(ball).create(SpriteComponent.class);
+        spriteComponent.textureRegion = new TextureRegion(candyTexture);
+        spriteComponent.originX = 0.5f;
+        spriteComponent.originY = 0.5f;
         PhysicsBodyComponent physicsBodyComponent = world.edit(ball).create(PhysicsBodyComponent.class);
         physicsBodyComponent.hasMass = true;
         physicsBodyComponent.fixtures = new PhysicsBodyComponent.Fixture[1];

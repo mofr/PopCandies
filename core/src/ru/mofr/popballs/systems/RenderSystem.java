@@ -6,9 +6,8 @@ import com.artemis.annotations.All;
 import com.artemis.utils.IntBag;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import ru.mofr.popballs.components.PositionComponent;
@@ -38,17 +37,23 @@ public class RenderSystem extends BaseEntitySystem {
         int[] ids = actives.getData();
         for (int i = 0, s = actives.size(); s > i; i++) {
             int id = ids[i];
-            Sprite sprite = mSpriteComponent.get(id).sprite;
+            SpriteComponent spriteComponent = mSpriteComponent.get(id);
             PositionComponent positionComponent = mPositionComponent.get(id);
             double positionX = Camera.projectX(positionComponent.x);
             double positionY = Camera.projectY(positionComponent.y);
+            TextureRegion textureRegion = spriteComponent.textureRegion;
 
             transform.idt();
             transform.translate((float)positionX, (float)positionY, 0);
             transform.rotate(Vector3.Z, (float)positionComponent.angle);
+            transform.translate(
+                    -textureRegion.getRegionWidth() * spriteComponent.originX,
+                    -textureRegion.getRegionHeight() * spriteComponent.originY,
+                    0
+            );
 
             batch.setTransformMatrix(transform);
-            sprite.draw(batch);
+            batch.draw(textureRegion, 0, 0);
         }
         batch.end();
     }
