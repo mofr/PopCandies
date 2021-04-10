@@ -8,9 +8,14 @@ import ru.mofr.popballs.components.PoppableComponent;
 import ru.mofr.popballs.components.PositionComponent;
 import ru.mofr.popballs.components.SpriteComponent;
 
+import java.util.Random;
+
 public class CandyFactory {
+    private static final Random random = new Random();
+
     public static int create(World world, double x, double y) {
-        Texture texture = new Texture("candy10.png");
+        String textureFilename = "candy" + (random.nextInt(6) + 1) + ".png";
+        Texture texture = new Texture(textureFilename);
         texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         int entity = world.create();
