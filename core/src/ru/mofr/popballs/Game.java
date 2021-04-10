@@ -23,6 +23,7 @@ public class Game extends ApplicationAdapter {
                 .with(new AnimationSystem())
                 .with(new RenderSystem())
                 .with(new PhysicsDebugRenderSystem())
+                .with(new LimitedLifetimeSystem())
                 .with(new CleanUpSystem())
                 .build();
 

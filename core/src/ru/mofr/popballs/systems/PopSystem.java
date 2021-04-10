@@ -31,6 +31,8 @@ public class PopSystem extends IteratingSystem {
         spriteComponent.originY = 0.5f;
         AnimationComponent animationComponent = world.edit(entityId).create(AnimationComponent.class);
         animationComponent.animation = loadAnimation();
+        LimitedLifetimeComponent limitedLifetimeComponent = world.edit(entityId).create(LimitedLifetimeComponent.class);
+        limitedLifetimeComponent.lifetime = animationComponent.animation.getAnimationDuration();
     }
 
     private Animation<TextureRegion> loadAnimation() {
