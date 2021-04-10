@@ -49,18 +49,20 @@ public class RenderSystem extends BaseEntitySystem {
             double positionX = Camera.projectX(positionComponent.x);
             double positionY = Camera.projectY(positionComponent.y);
             TextureRegion textureRegion = spriteComponent.textureRegion;
+            float width = textureRegion.getRegionWidth() * spriteComponent.scaleX;
+            float height = textureRegion.getRegionHeight() * spriteComponent.scaleY;
 
             transform.idt();
             transform.translate((float)positionX, (float)positionY, 0);
             transform.rotate(Vector3.Z, (float)positionComponent.angle);
             transform.translate(
-                    -textureRegion.getRegionWidth() * spriteComponent.originX,
-                    -textureRegion.getRegionHeight() * spriteComponent.originY,
+                    -width * spriteComponent.originX,
+                    -height * spriteComponent.originY,
                     0
             );
 
             batch.setTransformMatrix(transform);
-            batch.draw(textureRegion, 0, 0);
+            batch.draw(textureRegion, 0, 0, width, height);
         }
         batch.end();
     }

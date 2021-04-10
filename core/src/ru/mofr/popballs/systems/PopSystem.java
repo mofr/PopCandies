@@ -29,6 +29,8 @@ public class PopSystem extends IteratingSystem {
         SpriteComponent spriteComponent = world.edit(entityId).create(SpriteComponent.class);
         spriteComponent.originX = 0.5f;
         spriteComponent.originY = 0.5f;
+        spriteComponent.scaleX = 2;
+        spriteComponent.scaleY = 2;
         AnimationComponent animationComponent = world.edit(entityId).create(AnimationComponent.class);
         animationComponent.animation = loadAnimation();
         LimitedLifetimeComponent limitedLifetimeComponent = world.edit(entityId).create(LimitedLifetimeComponent.class);
