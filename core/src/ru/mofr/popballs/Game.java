@@ -20,6 +20,7 @@ public class Game extends ApplicationAdapter {
                 .with(new PopOnClickSystem())
                 .with(new PopSystem())
                 .with(new PhysicsSystem())
+                .with(new AnimationSystem())
                 .with(new RenderSystem())
                 .with(new PhysicsDebugRenderSystem())
                 .with(new CleanUpSystem())
