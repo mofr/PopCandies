@@ -7,4 +7,5 @@ public class SpriteComponent extends Component {
     public TextureRegion textureRegion;
     public float originX;
     public float originY;
+    public int order;
 }

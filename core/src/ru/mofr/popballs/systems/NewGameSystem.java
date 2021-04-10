@@ -2,10 +2,13 @@ package ru.mofr.popballs.systems;
 
 import com.artemis.annotations.All;
 import com.artemis.systems.IteratingSystem;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import ru.mofr.popballs.components.NewGameComponent;
 import ru.mofr.popballs.components.PhysicsBodyComponent;
 import ru.mofr.popballs.components.PositionComponent;
+import ru.mofr.popballs.components.SpriteComponent;
 import ru.mofr.popballs.factories.CandyFactory;
 
 import java.util.Random;
@@ -16,20 +19,35 @@ public class NewGameSystem extends IteratingSystem {
 
     @Override
     protected void process(int entityId) {
+        createBackground();
+        createWalls();
         for (int i = 0; i < 70; ++i) {
             float x = random.nextInt(200) - 100;
             float y = 1000 + random.nextInt(400);
             CandyFactory.create(world, x, y);
         }
-        createWalls();
+    }
+
+    private void createBackground() {
+        Texture texture = new Texture("background1.png");
+
+        int entity = world.create();
+        PositionComponent positionComponent = world.edit(entity).create(PositionComponent.class);
+        positionComponent.x = 0;
+        positionComponent.y = -200;
+        SpriteComponent spriteComponent = world.edit(entity).create(SpriteComponent.class);
+        spriteComponent.textureRegion = new TextureRegion(texture);
+        spriteComponent.originX = 0.5f;
+        spriteComponent.originY = 0.5f;
+        spriteComponent.order = -1;
     }
 
     private void createWalls() {
-        int walls = world.create();
-        PositionComponent positionComponent = world.edit(walls).create(PositionComponent.class);
+        int entity = world.create();
+        PositionComponent positionComponent = world.edit(entity).create(PositionComponent.class);
         positionComponent.x = 0;
         positionComponent.y = -100;
-        PhysicsBodyComponent physicsBodyComponent = world.edit(walls).create(PhysicsBodyComponent.class);
+        PhysicsBodyComponent physicsBodyComponent = world.edit(entity).create(PhysicsBodyComponent.class);
         physicsBodyComponent.hasMass = false;
         physicsBodyComponent.fixtures = new PhysicsBodyComponent.Fixture[3];
         physicsBodyComponent.fixtures[0] = new PhysicsBodyComponent.Fixture();

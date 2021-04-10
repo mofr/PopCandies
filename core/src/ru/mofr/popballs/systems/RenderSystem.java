@@ -14,6 +14,9 @@ import ru.mofr.popballs.components.PositionComponent;
 import ru.mofr.popballs.components.SpriteComponent;
 import ru.mofr.popballs.utils.Camera;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 @All({SpriteComponent.class, PositionComponent.class})
 public class RenderSystem extends BaseEntitySystem {
     private final SpriteBatch batch;
@@ -30,15 +33,19 @@ public class RenderSystem extends BaseEntitySystem {
         Gdx.gl.glClearColor(0.85f, 0.85f, 0.85f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        Gdx.gl.glLineWidth(2);
-
-        batch.begin();
         IntBag actives = subscription.getEntities();
         int[] ids = actives.getData();
-        for (int i = 0, s = actives.size(); s > i; i++) {
-            int id = ids[i];
-            SpriteComponent spriteComponent = mSpriteComponent.get(id);
-            PositionComponent positionComponent = mPositionComponent.get(id);
+        ids = Arrays.stream(ids, 0, actives.size()).
+                boxed().
+                sorted(Comparator.comparingInt(entity -> mSpriteComponent.get(entity).order)).
+                mapToInt(i -> i).
+                toArray();
+
+        batch.begin();
+        for (int i = 0; i < actives.size(); i++) {
+            int entity = ids[i];
+            SpriteComponent spriteComponent = mSpriteComponent.get(entity);
+            PositionComponent positionComponent = mPositionComponent.get(entity);
             double positionX = Camera.projectX(positionComponent.x);
             double positionY = Camera.projectY(positionComponent.y);
             TextureRegion textureRegion = spriteComponent.textureRegion;
