@@ -18,6 +18,7 @@ public class Game extends ApplicationAdapter {
                 .with(new NewGameSystem())
 //                .with(new CreateCandyOnClickSystem())
                 .with(new PopOnClickSystem())
+                .with(new CreateCandyOnPopSystem())
                 .with(new PopSystem())
                 .with(new PhysicsSystem())
                 .with(new AnimationSystem())

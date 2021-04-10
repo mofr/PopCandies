@@ -2,48 +2,26 @@ package ru.mofr.popballs.systems;
 
 import com.artemis.annotations.All;
 import com.artemis.systems.IteratingSystem;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import ru.mofr.popballs.components.*;
+import ru.mofr.popballs.components.NewGameComponent;
+import ru.mofr.popballs.components.PhysicsBodyComponent;
+import ru.mofr.popballs.components.PositionComponent;
+import ru.mofr.popballs.factories.CandyFactory;
 
 import java.util.Random;
 
 @All(NewGameComponent.class)
 public class NewGameSystem extends IteratingSystem {
-    private final Texture candyTexture = new Texture("candy10.png");
     private final Random random = new Random();
-
-    public NewGameSystem() {
-        candyTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-    }
 
     @Override
     protected void process(int entityId) {
         for (int i = 0; i < 70; ++i) {
             float x = random.nextInt(200) - 100;
             float y = 1000 + random.nextInt(400);
-            createBall(x, y);
+            CandyFactory.create(world, x, y);
         }
         createWalls();
-    }
-
-    private void createBall(float x, float y) {
-        int ball = world.create();
-        PositionComponent positionComponent = world.edit(ball).create(PositionComponent.class);
-        positionComponent.x = x;
-        positionComponent.y = y;
-        SpriteComponent spriteComponent = world.edit(ball).create(SpriteComponent.class);
-        spriteComponent.textureRegion = new TextureRegion(candyTexture);
-        spriteComponent.originX = 0.5f;
-        spriteComponent.originY = 0.5f;
-        PhysicsBodyComponent physicsBodyComponent = world.edit(ball).create(PhysicsBodyComponent.class);
-        physicsBodyComponent.hasMass = true;
-        physicsBodyComponent.fixtures = new PhysicsBodyComponent.Fixture[1];
-        physicsBodyComponent.fixtures[0] = new PhysicsBodyComponent.Fixture();
-        physicsBodyComponent.fixtures[0].circle = new PhysicsBodyComponent.Circle();
-        physicsBodyComponent.fixtures[0].circle.radius = 60;
-        world.edit(ball).create(PoppableComponent.class);
     }
 
     private void createWalls() {
